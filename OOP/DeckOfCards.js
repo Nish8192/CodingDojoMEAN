@@ -102,11 +102,13 @@ function DeckOfCards(){
 
 var aDeck = new DeckOfCards();
 aDeck.createDeck();
+console.log(aDeck.deck)
 aDeck.shuffle();
 console.log(aDeck.deck);
 console.log(aDeck.deck.length);
 
 var me = new Player("Nishant");
+var you = new Player("Jake");
 aDeck.deal(me);
 console.log(me.card1 + " " + me.card2);
 aDeck.deal(me);
@@ -114,10 +116,15 @@ console.log(me.card1 + " " + me.card2);
 
 aDeck.deal(me);
 console.log(me.card1 + " " + me.card2);
+console.log(you.card1 + " " + you.card2);
 
 aDeck.deal(me);
 console.log(me.card1 + " " + me.card2);
+console.log(you.card1 + " " + you.card2);
 
 aDeck.deal(me);
 console.log(me.card1 + " " + me.card2);
 console.log(aDeck.deck.length);
+
+aDeck.deal(you);
+console.log(you.card1 + " " + you.card2);
