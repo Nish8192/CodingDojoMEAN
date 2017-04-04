@@ -1,41 +1,46 @@
 var _ = {
-   map: function(list, iteratee) {
+   map: function(list, callback) {
      var arr = [];
-     for(let i = 0, i < list.length; i++){
-         arr.push(iteratee(list[i]));
+     for(let i = 0; i < list.length; i++){
+         arr.push(callback(list[i]));
      }
      return arr;
    },
-   reduce: function(list, iteratee, memo) {
+   reduce: function(list, callback, memo) {
      for(let i = 0; i < list.length; i++){
-         iteratee(memo, list[i]);
+        memo = callback(memo, list[i]);
      }
      return memo;
    },
-   find: function(list, iteratee) {
+   find: function(list, callback) {
      for(let i = 0; i < list.length; i++){
-         if(iteratee(list[i])){
-             return true;
+         if(callback(list[i])){
+             return list[i];
          }
      }
      return undefined;
    },
-   filter: function(list, iteratee) {
+   filter: function(list, callback) {
      var arr = [];
      for(let i = 0; i < list.length; i++){
-         if(iteratee(list[i])){
+         if(callback(list[i])){
              arr.push(list[i]);
          }
      }
      return arr;
    },
-   reject: function(list, iteratee) {
+   reject: function(list, callback) {
      var arr = [];
      for(let i = 0; i < list.length; i++){
-         if(!iteratee(list[i])){
+         if(!callback(list[i])){
              arr.push(list[i]);
          }
      }
      return arr;
    }
  }
+
+var evens = _.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+var output = _.reduce([1,2,3,4,5,6], function(memo, num){return memo + num; }, 0);
+console.log(evens);
+console.log(output);
