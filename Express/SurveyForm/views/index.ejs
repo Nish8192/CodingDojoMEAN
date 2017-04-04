@@ -3,9 +3,14 @@
     <head>
         <meta charset="utf-8">
         <title>Survery Form</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+        <script type ="text/javascript">
+
+        </script>
     </head>
     <body>
-        <form action="/users" method="post">
+        <form action="/result" method="post">
             <p>Your Name: <input required type="text" name="name" value=""></p>
             <p>Dojo Location: <select required name="location">
                 <option value="" disabled selected>Choose Location</option>

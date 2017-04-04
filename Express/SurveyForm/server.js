@@ -17,7 +17,7 @@ app.get('/', function(req, res) {
  res.render("index");
 })
 // post route for adding a user
-app.post('/users', function(req, res) {
+app.post('/result', function(req, res) {
  console.log("POST DATA", req.body);
  var user_data = {
      name: req.body.name,

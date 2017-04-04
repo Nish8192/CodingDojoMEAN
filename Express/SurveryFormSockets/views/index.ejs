@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Survery Form</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+        <script type ="text/javascript">
+            $(document).ready(function(){
+                var socket = io.connect();
+                $("#submit_survery").click(function(){
+                    socket.emit("survey_submitted",
+                    {name: $('#name').val(),
+                    location: $('#location').val(),
+                    language: $('#language').val(),
+                    comment: $('#comment').val()})
+                })
+                socket.on("updated_message", function(data){
+                    $("#result").append(
+                        `<p>${data.message}</p>`
+                    );
+                })
+                socket.on("random_number", function(data){
+                $("#result").append(
+                    `<p>Your lucky number is: ${data.number}</p>`
+                );
+            })
+            })
+        </script>
+    </head>
+    <body>
+        <div id="result" style="background-color: green">
+
+        </div>
+            <p>Your Name: <input required type="text" id="name" name="name" value=""></p>
+            <p>Dojo Location: <select required name="location" id="location">
+                <option value="" disabled selected>Choose Location</option>
+                <option value="Washington DC">Washington DC</option>
+                <option value="Seattle">Seattle</option>
+                <option value="San Jose">San Jose</option>
+                <option value="New York City">New York City</option>
+            </select></p>
+            <p>Favorite Language: <select required name="language" id="language">
+                <option value="" disabled selected>Choose a Lanuage</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Python">Python</option>
+                <option value="Ruby">Ruby</option>
+                <option value="Swift">Swift</option>
+            </select></p>
+            <p>Comment (optional):</p>
+            <textarea name="comment" rows="8" cols="80" id="comment"></textarea>
+            <button type="button" name="button" id="submit_survery">Submit Survey!</button>
+    </body>
+</html>
