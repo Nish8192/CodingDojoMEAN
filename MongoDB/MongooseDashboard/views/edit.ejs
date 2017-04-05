@@ -1,0 +1,27 @@
+<html>
+<head>
+<title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            // this triggers the connection event in our server!
+            var socket = io.connect();
+            // we'll write all the socket stuff after the above line!
+        })
+    </script>
+</head>
+<body>
+    <h1>Edit/Delete this poor lemur :(</h1>
+    <form action="/lemurs/<%=lemurs[0]._id%>" method="post">
+        <p>Name: <input type="text" name="name" value="<%=lemurs[0].name%>"></p>
+        <p>Age: <input type="text" name="age" value="<%=lemurs[0].age%>"></p>
+        <p>Weight: <input type="text" name="weight" value="<%=lemurs[0].weight%>"></p>
+        <p>Height: <input type="text" name="height" value="<%=lemurs[0].height%>"></p>
+        <input type="submit" name="" value="Save Changes to Lemur!">
+    </form>
+    <form action="/lemurs/destroy/<%=lemurs[0]._id%>" method="post">
+        <input type="submit" name="" value="Delete?">
+    </form>
+</body>
+</html>

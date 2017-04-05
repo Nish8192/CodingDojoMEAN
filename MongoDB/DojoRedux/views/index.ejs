@@ -1,0 +1,29 @@
+<html>
+<head>
+<title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            // this triggers the connection event in our server!
+            var socket = io.connect();
+            // we'll write all the socket stuff after the above line!
+        })
+    </script>
+</head>
+<body>
+    <% if(err){ %>
+        <% for(let i = 0; i < err.length; i++){ %>
+    <h3 style="background-color: red;"><%= err[i] %></h3>
+    <% } %>
+    <% } %>
+    <h1>Welcome to QuotingDojo!!</h1>
+    <form action="/quotes" method="post">
+        <p>Your Name: <input type="text" name="name" value=""></p>
+        <p>Your Quote: </p>
+        <textarea name="quote" rows="8" cols="80"></textarea>
+        <input type="submit" name="" value="Submit Quote!!">
+    </form>
+    <a href="/quotes" type="button">Skip to Quotes</a>
+</body>
+</html>
