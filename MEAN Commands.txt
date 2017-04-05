@@ -4,6 +4,14 @@ npm install express --save
 npm install ejs --save
 npm install body-parser --save
 npm install socket.io --save
+npm install mongoose --save
+
+***IN ONE LINE***
+npm init -y && npm install express --save && npm install ejs --save && npm install body-parser --save && npm install socket.io --save && npm install mongoose --save
+
+
+**OPTIONAL MODULES**
+npm install mongoose-validator --save
 
 INSTALL NPM PACKAGES
 npm init -y
