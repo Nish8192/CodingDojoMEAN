@@ -27,13 +27,23 @@ app.post('/users', function(req, res) {
 var server = app.listen(8192, function() {
  console.log("Listening on port 8192");
 });
-
+var messages = [];
+var i = 0;
+var users = {};
 var io = require('socket.io').listen(server);
-
 io.sockets.on('connection', function (socket) {
+    var current_id = i;
+    i++;
     console.log("WE ARE USING SOCKETS!");
     console.log(socket.id);
-    socket.on("button_clicked", function(data){
-
+    socket.on("new_user", function(data){
+        users[current_id] = data.user_name;
+        console.log(data.user_name);
+        messages.push(data.user_name + " has logged in!!")
+        io.emit("new_message", {messages: messages, users: users, id:current_id})
     });
+    socket.on("message_sent", function(data){
+        messages.push(users[current_id] + ": " + data.message);
+        io.emit("new_message", {messages: messages, users: users, id:current_id})
+    })
 });

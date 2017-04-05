@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Group Chat!!</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            $("#message_create").hide();
+            // this triggers the connection event in our server!
+            var socket = io.connect();
+            $("#log_in").click(function(){
+                socket.emit("new_user", {user_name: $("#user_name").val()});
+                $("#message_create").show();
+            })
+            socket.on("new_message", function(data){
+                $("#create").remove();
+                $("#all_messages").html(``);
+                for(let i = 0; i < data.messages.length; i++){
+                $("#all_messages").append(
+                    `<p>${data.messages[i]}</p>`
+                );}
+            });
+            $("#send").click(function(){
+                socket.emit("message_sent", {message: $("#new_m").val()})
+                $("#new_m").val(``);
+            })
+        });
+    </script>
+</head>
+<body>
+    <div id="create">
+        <p>Enter your name: <input type="text" name="name" id="user_name" value=""></p>
+        <button type="button" name="log_in" id="log_in">Log In</button>
+    </div>
+    <div id="all_messages">
+
+    </div>
+    <div id="message_create">
+        <input type="text" name="new_m" id="new_m" value=""> <button type="button" name="send" id="send">Send Message</button>
+    </div>
+</body>
+</html>
