@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="ctrlusers">
+    <head>
+    <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-m1tb{font-weight:bold;background-color:#000000;color:#ffffff;text-align:center;vertical-align:top}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+        <meta charset="utf-8">
+        <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+        <title>Controlling Users</title>
+        <script type="text/javascript">
+            var ControlUsers = angular.module("ctrlusers", []);
+            
+            ControlUsers.controller("Users-Controller", function($scope){
+                $scope.users = [
+                    {first_name: "Nishant", last_name: "Aggarwal", fav_lang: "JavaScript"},
+                    {first_name: "Marco", last_name: "The Dancer", fav_lang: "Spanish"},
+                    {first_name: "Lone", last_name: "Jedi", fav_lang: "Not JavaScript"},
+                    {first_name: "Poopy", last_name: "Herman", fav_lang: "English"}
+                ]
+
+                $scope.addUser = function(){
+                    $scope.users.push($scope.newUser);
+                    $scope.newUser = {};
+                }
+
+                $scope.removeUser = function(i){
+                    $scope.users.splice(i,1);
+                }
+
+            })
+        </script>
+    </head>
+    <body ng-controller="Users-Controller">
+        <h3>Add a New User!</h3>
+        <form>
+            <p>First Name: <input type="text" ng-model="newUser.first_name"></p>
+            <p>Last Name: <input type="text" ng-model="newUser.last_name"></p>
+            <p>Favorite Language: <input type="text" ng-model="newUser.fav_lang"></p>
+            <input type="submit" ng-click="addUser()">
+        </form>
+
+        <p>Filter By: <input type="text" ng-model="filter"></p>
+        <table class="tg">
+  <tr>
+    <th class="tg-m1tb">First Name</th>
+    <th class="tg-m1tb">Last Name</th>
+    <th class="tg-m1tb">Favorite Language</th>
+    <th class="tg-m1tb">Actions</th>
+  </tr>
+  <tr ng-repeat="user in users | filter:filter track by $index">
+    <td class="tg-yw4l">{{user.first_name}}</td>
+    <td class="tg-yw4l">{{user.last_name}}</td>
+    <td class="tg-yw4l">{{user.fav_lang}}</td>
+    <td class="tg-yw4l"><button type="button" ng-click="removeUser($index)">Delete User!</button></td>
+  </tr>
+</table>
+    </body>
+</html>
