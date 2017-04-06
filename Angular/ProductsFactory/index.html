@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="FwP">
+    <head>
+    <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-m1tb{font-weight:bold;background-color:#000000;color:#ffffff;text-align:center;vertical-align:top}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+        <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+        <meta charset="utf-8">
+        <title>Products w/ Factories</title>
+        <script type="text/javascript">
+        var FactoriesWProducts = angular.module("FwP", []);
+
+        FactoriesWProducts.factory("productFactory", function(){
+            var products = [
+                {name: "Wireless Mouse", price: 55.99},
+                {name: "Headphones", price: 191.99},
+                {name: "Laptop", price: 1099.99},
+                {name: "Rubber Ducky", price: 22.99},
+            ];
+            var factory = {};
+            factory.getProducts = function(callback){
+                callback(products);
+            }
+            factory.addProduct = function(newProduct){
+                products.push(newProduct);
+            }
+            factory.removeProduct = function(index){
+                products.splice(index, 1);
+            }
+            return factory;
+        });
+
+        FactoriesWProducts.controller("FwPController", ["$scope", "productFactory", function($scope, productFactory){
+            $scope.products = [];
+            productFactory.getProducts(function(data){
+                $scope.products = data;
+            })
+            $scope.addProduct = function(){
+                productFactory.addProduct($scope.product);
+                $scope.product = {};
+            }
+            $scope.removeProduct = function(index){
+                productFactory.removeProduct(index);
+            }
+        }])
+        </script>
+    </head>
+    <body ng-controller="FwPController">
+        <h2>Add a Product</h2>
+        <form>
+            <p>Product Name: <input type="text" ng-model="product.name"></p>
+            <p>Product Price: <input type="text" ng-model="product.price"></p>
+            <input type="submit" value="Add Product" ng-click="addProduct()">
+        </form>
+
+        <table class="tg">
+  <tr>
+    <th class="tg-m1tb">Product Name</th>
+    <th class="tg-m1tb">Product Price</th>
+    <th class="tg-m1tb">Actions</th>
+  </tr>
+  <tr ng-repeat="product in products track by $index">
+    <td class="tg-yw4l">{{product.name}}</td>
+    <td class="tg-yw4l" id="currency-default">{{product.price | currency}}</td>
+    <td class="tg-yw4l"><button type="button" ng-click="removeProduct($index)">Delete Product!</button></td>
+  </tr>
+</table>
+    </body>
+</html>
