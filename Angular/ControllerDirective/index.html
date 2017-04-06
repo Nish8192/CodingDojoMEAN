@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="secondApp">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            var favFoods = angular.module("secondApp", []);
+
+            favFoods.controller("foods", function($scope){
+                $scope.best_foods = [
+                    {food: "Chipotle"}
+                ];
+
+                $scope.addFood = function(){
+                    $scope.best_foods.push($scope.newFood);
+                    $scope.newFood = {};
+                }
+            });
+
+        </script>
+    </head>
+    <body>
+        <div ng-controller="foods">
+            <form>
+                <h3>What's your favorite food? <input type="text" ng-model="newFood.food"></h3>
+                <input type="submit" value="Add to List" ng-click="addFood()">
+            </form>
+            <p>Are you sure it's <span ng-bind="newFood.food"></span>???</p>
+            <h3>Current Favorites!</h3>
+            <input type="text" ng-model="filter">
+        <ul>
+            <li ng-repeat="food in best_foods | filter:filter">{{food.food}}</li>
+        </ul>
+
+
+        </div>
+
+    </body>
+</html>
