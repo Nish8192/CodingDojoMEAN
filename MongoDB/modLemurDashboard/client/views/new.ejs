@@ -1,0 +1,24 @@
+<html>
+<head>
+<title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            // this triggers the connection event in our server!
+            var socket = io.connect();
+            // we'll write all the socket stuff after the above line!
+        })
+    </script>
+</head>
+<body>
+    <h1>Create a new Lemur!</h1>
+    <form action="/lemurs" method="post">
+        <p>Name: <input type="text" name="name" value=""></p>
+        <p>Age: <input type="text" name="age" value=""></p>
+        <p>Weight: <input type="text" name="weight" value=""></p>
+        <p>Height: <input type="text" name="height" value=""></p>
+        <input type="submit" name="" value="Create New Lemur!">
+    </form>
+</body>
+</html>
