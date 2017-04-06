@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="firstApp">
+    <head>
+        <meta charset="utf-8">
+        <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+        <title>First Angular Page!!</title>
+        <script type="text/javascript">
+        var myFirstApp = angular.module("firstApp", []);
+
+        myFirstApp.controller("firstController", function($scope){
+            $scope.people = [
+                {name: "Nishant", objective: "get inside YOUR head!!!"}
+            ];
+            $scope.addPerson = function(){
+                $scope.people.push($scope.newPerson);
+                $scope.newPerson = {};
+            }
+        });
+        </script>
+    </head>
+    <body>
+        <div ng-controller="firstController">
+            <h1 ng-repeat="person in people">I am {{person.name}} and I want to {{person.objective}}</h1>
+
+        <h3>What's your goal???</h3>
+        <form>
+            <p>Name: <input type="text" ng-model="newPerson.name"></p>
+            <p>Objective: <input type="text" ng-model="newPerson.objective"></p>
+            <input type="submit" value="Add Yourself!!" ng-click="addPerson()">
+        </form>
+        </div>
+    </body>
+</html>
