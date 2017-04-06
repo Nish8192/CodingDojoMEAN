@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html ng-app="mainApp">
+    <head>
+    <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-m1tb{font-weight:bold;background-color:#000000;color:#ffffff;text-align:center;vertical-align:top}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+        <meta charset="utf-8">
+        <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+        <title>Products and Orders</title>
+        <script type="text/javascript">
+        var main = angular.module("mainApp", []);
+        main.factory('poFactory', function(){
+            var products = [
+                {name: "Wireless Mouse", price: 55.99, quantity: 50},
+                {name: "Headphones", price: 191.99, quantity: 50},
+                {name: "Laptop", price: 1099.99, quantity: 50},
+                {name: "Rubber Ducky", price: 22.99, quantity: 50},
+            ];
+            var factory = {};
+            factory.getProducts = function(callback){
+                callback(products);
+            }
+            factory.addProduct = function(product){
+                product.quantity = 50;
+                products.push(product);
+            }
+            factory.removeProduct = function(index){
+                products.splice(index, 1);
+            }
+            factory.purchaseProduct = function(index){
+                if(products[index].quantity > 0){
+                    products[index].quantity--;
+                }
+            }
+            return factory;
+        })
+
+        main.controller("productController", ["$scope", "poFactory", function($scope, poFactory){
+            $scope.products = [];
+            poFactory.getProducts(function(data){
+                $scope.products = data;
+            })
+            $scope.addProduct = function(){
+                poFactory.addProduct($scope.newProduct);
+                $scope.newProduct = {};
+            }
+            $scope.removeProduct = function(index){
+                poFactory.removeProduct(index);
+            }
+
+        }])
+
+        main.controller("orderController", ["$scope", "poFactory", function($scope, poFactory){
+            $scope.orders = [];
+            poFactory.getProducts(function(data){
+                $scope.orders = data;
+            })
+            $scope.purchaseProduct = function(index){
+                poFactory.purchaseProduct(index);
+            }
+        }])
+
+        </script>
+    </head>
+    <body>
+        <!-- PRODUCT CONTROLLER -->
+        <div ng-controller="productController">
+            <form>
+                <p>Product Name: <input type="text" ng-model="newProduct.name"></p>
+                <p>Product Price: <input type="text" ng-model="newProduct.price"></p>
+                <input type="submit" value="Add Product" ng-click="addProduct()">
+            </form>
+            <table class="tg">
+      <tr>
+        <th class="tg-m1tb">Product Name</th>
+        <th class="tg-m1tb">Product Price</th>
+        <th class="tg-m1tb">Actions</th>
+      </tr>
+      <tr ng-repeat="product in products track by $index">
+        <td class="tg-yw4l">{{product.name}}</td>
+        <td class="tg-yw4l" id="currency-default">{{product.price | currency}}</td>
+        <td class="tg-yw4l"><button type="button" ng-click="removeProduct($index)">Delete Product!</button></td>
+      </tr>
+    </table>
+        </div>
+
+
+<!-- ORDER CONTROLLER -->
+        <div ng-controller="orderController">
+            <table class="tg">
+      <tr>
+        <th class="tg-m1tb">Product Name</th>
+        <th class="tg-m1tb">Product Price</th>
+        <th class="tg-m1tb">Quantity Available</th>
+        <th class="tg-m1tb">Actions</th>
+      </tr>
+      <tr ng-repeat="order in orders track by $index">
+        <td class="tg-yw4l">{{order.name}}</td>
+        <td class="tg-yw4l" id="currency-default">{{order.price | currency}}</td>
+        <td class="tg-yw4l">{{order.quantity}}</td>
+        <td class="tg-yw4l"><button type="button" ng-click="purchaseProduct($index)">Buy!!</button></td>
+      </tr>
+        </div>
+
+    </body>
+</html>
