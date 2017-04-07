@@ -1,3 +1,17 @@
 <div ng-controller="teamsController">
-
+    <form>
+        <h1>Add/Remove Teams</h1>
+        <p>Name: <input type="text" ng-model="newTeam.name"></p>
+        <input type="submit" value="Add Team" ng-click="addTeam()">
+    </form>
+    <table class="tg">
+  <tr>
+    <th class="tg-m1tb">Name</th>
+    <th class="tg-m1tb">Actions</th>
+  </tr>
+  <tr ng-repeat="team in teams track by $index">
+    <td class="tg-yw4l">{{team.name}}</td>
+    <td class="tg-yw4l"><button type="button" ng-click="removeTeam($index)">Remove Team</button></td>
+  </tr>
+</table>
 </div>

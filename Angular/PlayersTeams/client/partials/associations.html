@@ -1,3 +1,23 @@
 <div ng-controller="associationsController">
-
+    <form>
+    <select ng-model="id">
+        <option ng-repeat="player in players track by $index" value="$index" selected>{{player.name}}</option>
+    </select>
+    <select ng-model="team">
+        <option ng-repeat="team in teams track by $index" value="{{team.name}}" selected>{{team.name}}</option>
+    </select>
+    <button type="button" ng-click="createAssociation()">Assign Player to Team</button>
+</form>
+    <table class="tg">
+  <tr>
+    <th class="tg-m1tb">Player</th>
+    <th class="tg-m1tb">Team</th>
+    <th class="tg-m1tb">Actions</th>
+  </tr>
+  <tr ng-repeat="player in players track by $index">
+    <td class="tg-yw4l">{{player.name}}</td>
+    <td class="tg-yw4l">{{player.team}}</td>
+    <td class="tg-yw4l"><button type="button" ng-click="removeAssociation($index)">Remove Association</button></td>
+  </tr>
+</table>
 </div>

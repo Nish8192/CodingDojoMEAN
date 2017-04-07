@@ -2,16 +2,16 @@
     <form>
         <h1>Add/Remove Players</h1>
         <p>Name: <input type="text" ng-model="newPlayer.name"></p>
-        <input type="submit" value="Add Player">
+        <input type="submit" value="Add Player" ng-click="addPlayer()">
     </form>
     <table class="tg">
   <tr>
     <th class="tg-m1tb">Name</th>
     <th class="tg-m1tb">Actions</th>
   </tr>
-  <tr ng-repeat="player in players">
+  <tr ng-repeat="player in players track by $index">
     <td class="tg-yw4l">{{player.name}}</td>
-    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"><button type="button" ng-click="removePlayer($index)">Remove Player</button></td>
   </tr>
 </table>
 </div>
