@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-m1tb{font-weight:bold;background-color:#000000;color:#ffffff;text-align:center;vertical-align:top}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+    <head>
+        <script src="angular/angular.js"></script>
+        <script src="angular-route/angular-route.js"></script>
+        <meta charset="utf-8">
+        <title>Players and Teams</title>
+        <script type="text/javascript">
+            var myApp = angular.module("app", ["ngRoute"]);
+            myApp.factory("teamFactory", function(){
+                var teams = [
+                    {name: "Seahawks"}
+                ];
+                var factory = {};
+                factory.index = function(callback){
+                    callback(teams);
+                }
+                factory.addTeam = function(newTeam){
+                    teams.push(newTeam);
+                }
+                factory.removeTeam = function(index){
+                    teams.splice(index, 1);
+                }
+                return factory;
+            })
+            myApp.factory("playerFactory", function(){
+                var players = [
+                    {name: "Nishant"}
+                ];
+                var factory = {};
+                factory.index = function(callback){
+                    callback(players);
+                }
+                factory.addPlayer = function(newPlayer){
+                    players.push(newPlayer);
+                }
+                factory.removePlayer = function(index){
+                    players.splice(index, 1);
+                }
+                return factory;
+            })
+            myApp.controller("teamsController", ["$scope", "teamFactory", function($scope, teamFactory){
+                $scope.teams = [];
+                teamFactory.index(function(data){
+                    $scope.teams = data;
+                })
+                $scope.addTeam = function(){
+                    teamFactory.addTeam($scope.newTeam);
+                    $scope.newTeam = {};
+                }
+                $scope.removeTeam = function(index){
+                    teamFactory.removeTeam(index);
+                }
+            }])
+            myApp.controller("playersController", ["$scope", "playerFactory", function($scope, playerFactory){
+                $scope.players = [];
+                playerFactory.index(function(data){
+                    $scope.players = data;
+                })
+                $scope.addPlayer = function(){
+                    playerFactory.addPlayer($scope.newPlayer);
+                    $scope.newPlayer = {};
+                }
+                $scope.removePlayer = function(index){
+                    playerFactory.removePlayer(index);
+                }
+            }])
+            myApp.controller("associationsController", ["$scope", "playerFactory", "teamFactory", function($scope, playerFactory, teamFactory){
+                $scope.players = [];
+                $scope.teams = [];
+                $scope.associations = [];
+                playerFactory.index(function(data){
+                    $scope.players = data;
+                })
+                teamFactory.index(function(data){
+                    $scope.teams = data;
+                })
+                $scope.createAssociation = function{
+                    $scope.association.push(newAssociation);
+                }
+            }])
+            myApp.config(function($routeProvider){
+                $routeProvider
+                .when('/'{
+                    templateUrl: "/partials/players.html"
+                })
+                .when('/teams'{
+                    templateUrl: "/partials/teams.html"
+                })
+                .when('/associations'{
+                    templateUrl: "/partials/associations.html"
+                })
+                .otherwise({
+                    redirectTo: "/"
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div ng-view="">
+
+        </div>
+
+    </body>
+</html>

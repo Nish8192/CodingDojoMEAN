@@ -1,0 +1,17 @@
+<div ng-controller="playersController">
+    <form>
+        <h1>Add/Remove Players</h1>
+        <p>Name: <input type="text" ng-model="newPlayer.name"></p>
+        <input type="submit" value="Add Player">
+    </form>
+    <table class="tg">
+  <tr>
+    <th class="tg-m1tb">Name</th>
+    <th class="tg-m1tb">Actions</th>
+  </tr>
+  <tr ng-repeat="player in players">
+    <td class="tg-yw4l">{{player.name}}</td>
+    <td class="tg-yw4l"></td>
+  </tr>
+</table>
+</div>

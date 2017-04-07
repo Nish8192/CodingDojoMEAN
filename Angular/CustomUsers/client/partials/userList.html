@@ -1,0 +1,16 @@
+<div ng-controller="userListController">
+    <table class="tg">
+<tr>
+<th class="tg-m1tb">First Name</th>
+<th class="tg-m1tb">Last Name</th>
+<th class="tg-m1tb">Favorite Language</th>
+<th class="tg-m1tb">Actions</th>
+</tr>
+<tr ng-repeat="user in users track by $index">
+<td class="tg-yw4l">{{user.first_name}}</td>
+<td class="tg-yw4l">{{user.last_name}}</td>
+<td class="tg-yw4l">{{user.fav_lang}}</td>
+<td class="tg-yw4l"><button type="button" ng-click="deleteUser($index)">Delete User!</button></td>
+</tr>
+</table>
+</div>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+    <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-m1tb{font-weight:bold;background-color:#000000;color:#ffffff;text-align:center;vertical-align:top}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+        <meta charset="utf-8">
+        <script src="angular/angular.js"></script>
+        <script src="angular-route/angular-route.js"></script>
+        <title>Custom Users</title>
+        <script type="text/javascript">
+            var userApp = angular.module("app", ["ngRoute"]);
+            userApp.factory("userFactory", function(){
+                var users = [
+                    {first_name: "Nishant", last_name: "Aggarwal", fav_lang: "JavaScript"},
+                ];
+                var factory = {};
+                factory.index = function(callback){
+                    callback(users);
+                }
+                factory.create = function(newUser){
+                    users.push(newUser);
+                }
+                factory.delete = function(index){
+                    users.splice(index, 1);
+                }
+                factory.show = function(index, callback){
+                    callback(users[index]);
+                }
+                return factory;
+            })
+            userApp.controller("userListController", ["$scope", "userFactory", function($scope, userFactory){
+                $scope.users = [];
+                userFactory.index(function(data){
+                    console.log(data);
+                    $scope.users = data;
+                });
+            }]);
+            userApp.controller("customizeUsersController", ["$scope", "userFactory", function($scope, userFactory){
+                console.log("customizeUsersController");
+                $scope.users = [];
+                userFactory.index(function(data){
+                    $scope.users = data;
+                });
+                $scope.createUser = function(){
+                    userFactory.create($scope.newUser);
+                    $scope.newUser = {};
+                }
+                $scope.deleteUser = function(index){
+                    userFactory.delete(index);
+                }
+            }])
+            userApp.config(function($routeProvider){
+                $routeProvider
+                .when('/',{
+                    // templateUrl: "index.html"
+                })
+                .when('/userList',{
+                    templateUrl:'partials/userList.html',
+                })
+                .when('/customizeUsers',{
+                    templateUrl: 'partials/customizeUsers.html'
+                })
+                .otherwise({
+                    redirectTo: "/"
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Customize Users</h1>
+        <a href="#!/userList">List All Users</a> | <a href="#!/customizeUsers">Customize Users</a>
+        <div ng-view="">
+
+        </div>
+    </body>
+</html>
