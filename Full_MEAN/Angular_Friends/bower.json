@@ -1,0 +1,22 @@
+{
+  "name": "BASE_ANGULAR_PROJECT",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Nishant Aggarwal <nish8192@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Nish8192/CodingDojoMEAN",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "angular-messages": "^1.6.4"
+  }
+}

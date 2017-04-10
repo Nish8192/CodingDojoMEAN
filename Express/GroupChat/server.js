@@ -24,7 +24,7 @@ app.post('/users', function(req, res) {
  res.redirect('/');
 })
 // tell the express app to listen on port 8192
-var server = app.listen(8192, function() {
+var server = app.listen(8000, function() {
  console.log("Listening on port 8192");
 });
 var messages = [];
