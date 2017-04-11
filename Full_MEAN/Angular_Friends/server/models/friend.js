@@ -2,8 +2,9 @@ var mongoose = require('mongoose');
 
 //CREATE MODEL SCHEMA
 var FriendSchema = new mongoose.Schema({
-    name: {type: String, required: true, minlength: 1},
-    favorite_language: {type: String, required: true, minlength: 1},
+    first_name: {type: String, required: true, minlength: 1},
+    last_name: {type: String, required: true, minlength: 1},
+    birthday: {type: Date, required: true}
 }, {timestamps: true})
 
 mongoose.model('Friend', FriendSchema); // We are setting this Schema in our Models as 'Friend'

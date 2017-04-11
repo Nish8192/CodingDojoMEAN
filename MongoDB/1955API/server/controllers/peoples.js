@@ -15,7 +15,7 @@ module.exports = {
         })
     },
     new: function(req, res){
-        pers = new Person({name: req.params.name});
+        var pers = new Person({name: req.params.name});
         pers.save(function(err){
             if(err){
                 console.log(err);

@@ -1,5 +1,8 @@
-<form ng-submit="create()" ng-controllers="FriendsController">
-    <p>User Name: <input type="text" ng-model="new_user.name"></p>
-    <p>Favorite Language: <input type="text" ng-model="new_user.favorite_language"></p>
+<div ng-controller="newController">
+<form ng-submit="create()" method="post">
+    <p>First Name: <input type="text" ng-model="newfriend.first_name"></p>
+    <p>Last Name: <input type="text" ng-model="newfriend.last_name"></p>
+    <p>Birthday: <input type="date" ng-model="newfriend.birthday"></p>
     <input type="submit" value="Create New User">
 </form>
+</div>

@@ -17,7 +17,7 @@ app.post('/friends', function(req, res) {
 app.put('/friends/:id', function(req, res) {
   friends.update(req, res);
 });
-app.delete('/friends/:id', function(req, res) {
+app.delete('/friends/:id/destroy', function(req, res) {
   friends.delete(req, res);
 });
 }
