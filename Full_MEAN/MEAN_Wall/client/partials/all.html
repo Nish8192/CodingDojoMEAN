@@ -1,0 +1,19 @@
+<div ng-controller="allController">
+    <table class="tg">
+  <tr>
+    <th class="tg-m1tb">First Name</th>
+    <th class="tg-m1tb">Last Name</th>
+    <th class="tg-m1tb">Birthday</th>
+    <th class="tg-m1tb">Edit</th>
+    <th class="tg-m1tb">Delete</th>
+  </tr>
+  <tr ng-repeat="friend in friends track by $index">
+    <td class="tg-yw4l">{{friend.first_name}}</td>
+    <td class="tg-yw4l">{{friend.last_name}}</td>
+    <td class="tg-yw4l">{{friend.birthday}}</td>
+    <td class="tg-yw4l"><button type="button" ng-click="showEdit(friend._id)">Edit</button></td>
+    <td class="tg-yw4l"><button type="button" ng-click="delete(friend._id)">DELETE</button></td>
+  </tr>
+</table>
+<button type="button" ng-click="createNew()">Add a New Friend</button>
+</div>
