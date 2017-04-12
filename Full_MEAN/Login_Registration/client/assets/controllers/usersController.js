@@ -1,16 +1,26 @@
-app.controller('usersController', ["$scope", "usersFactory", "$location", function($scope, usersFactory, $location){
-    $scope.message = "";
+app.controller('usersController', ["$scope", "usersFactory", "$location", "$cookies", function($scope, usersFactory, $location, $cookies){
+    $scope.messages = [];
     $scope.flag = false;
     $scope.create = function(){
         usersFactory.create($scope.newUser, function(data){
             if(data.errors){
                 console.log(data);
-                $scope.message = data.errors;
+                console.log(typeof(data.errors));
+                if(typeof(data.errors) == "object"){
+                    angular.forEach(data.errors, function(v, k){
+                        $scope.messages.push(data.errors[k].message);
+                    })
+                }
+                else{
+                    $scope.messages.push(data.errors);
+                }
                 $scope.flag = true;
                 $location.url("/");
             }
             else{
-                flag = false;
+                $scope.flag = false;
+                $cookies.put("user_id", data._id);
+                console.log($cookies.get("user_id"));
                 $location.url("/success");
             }
         })
@@ -24,9 +34,19 @@ app.controller('usersController', ["$scope", "usersFactory", "$location", functi
                 $location.url("/login");
             }
             else {
-                flag = false;
+                $scope.flag = false;
+                $cookies.put("user_id", data._id);
+                console.log($cookies.get("user_id"));
                 $location.url("/success");
             }
         })
+    }
+    $scope.logout = function(){
+        var cookies = $cookies.getAll();
+        angular.forEach(cookies, function(v, k){
+            $cookies.remove(k);
+        })
+        console.log($cookies.get("user_id"));
+        $location.url("/");
     }
 }])

@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 
 //CREATE MODEL SCHEMA
 var UserSchema = new mongoose.Schema({
-    first_name: {type: String, required: true, minlength: 1},
-    last_name: {type: String, required: true, minlength: 1},
-    email: {type: String, required: true, minlength: 1, unique: true,
+    first_name: {type: String, required: "Your first name is required!", minlength: 1},
+    last_name: {type: String, required: "Your last name is required!", minlength: 1},
+    email: {type: String, required: "Your email is required!", minlength: 1, unique: true,
             validate: {
                 validator: function(value){
                     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
@@ -13,7 +13,7 @@ var UserSchema = new mongoose.Schema({
         },
     password: {
      type: String,
-     required: true,
+     required: "A password is required!!",
      minlength: 8,
      validate: {
        validator: function( value ) {
@@ -22,7 +22,7 @@ var UserSchema = new mongoose.Schema({
        message: "Password failed validation, you must have at least 1 number, uppercase and special character"
      }
    },
-   birthday: {type: Date, required: true}
+   birthday: {type: Date, required: "You birthday is required!!"}
 }, {timestamps: true})
 
 // UserSchema.pre("save",function(next, done) {
