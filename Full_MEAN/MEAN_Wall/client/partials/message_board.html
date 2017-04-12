@@ -1,0 +1,17 @@
+<div ng-controller="messageController">
+    <button type="button" ng-click="logout()">LOGOUT</button>
+    <h1>Full MEAN Message Board</h1>
+    <p>Post a message:</p>
+    <textarea rows="8" cols="80" ng-model="message.content"></textarea>
+    <input type="submit" ng-click="createMessage()">
+
+    <div ng-repeat="message in messages">
+        <h3>{{message._user.user_name}} says {{message.content}}</h3>
+        <div ng-repeat="comment in message.comments">
+            <p>{{comment._user.user_name}} responded {{comment.content}}</p>
+        </div>
+        <textarea rows="4" cols="60" ng-model="comment.content"></textarea>
+            <input type="submit" ng-click="createComment(message._id)">
+    </div>
+
+</div>

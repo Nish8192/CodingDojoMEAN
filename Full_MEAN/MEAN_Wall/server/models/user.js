@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+var Schema = mongoose.Schema;
 //CREATE MODEL SCHEMA
 var UserSchema = new mongoose.Schema({
     user_name: {type: String, required: "You must provide a user name!", maxlength: 20},
