@@ -1,0 +1,12 @@
+<div ng-controller="usersController">
+    <h1 style="background-color:red; text-align:center;" ng-show="flag">{{message}}</h1>
+<form ng-submit="create()" method="post">
+    <p>First Name: <input type="text" ng-model="newUser.first_name"></p>
+    <p>Last Name: <input type="text" ng-model="newUser.last_name"></p>
+    <p>Email: <input type="text" ng-model="newUser.email"></p>
+    <p>Password: <input type="text" ng-model="newUser.password"></p>
+    <p>Confirm Password: <input type="text" ng-model="newUser.password_confirm"></p>
+    <p>Birthday: <input type="date" ng-model="newUser.birthday"></p>
+    <input type="submit" value="Create New User">
+</form>
+</div>
