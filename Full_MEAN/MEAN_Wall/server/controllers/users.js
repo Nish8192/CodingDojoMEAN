@@ -12,12 +12,8 @@ module.exports = {
             .populate("comments")
             .populate("_user")
             .exec(function(err, messages){
-                Comments.find({})
-                .populate("_user")
-                .exec(function(err, comments){
                 if(err){res.json(err);}
-                res.json({users:users, messages:messages, comments: comments})
-            })
+                res.json({users:users, messages:messages})
             })
         }))
     },

@@ -3,15 +3,17 @@
     <h1>Full MEAN Message Board</h1>
     <p>Post a message:</p>
     <textarea rows="8" cols="80" ng-model="message.content"></textarea>
-    <input type="submit" ng-click="createMessage()">
+    <input type="submit" ng-click="createMessage()" value="Create Message">
 
-    <div ng-repeat="message in messages">
-        <h3>{{message._user.user_name}} says {{message.content}}</h3>
+    <div ng-repeat="message in messages | orderBy:'-createdAt' track by $index">
+        <h3>{{message._user.user_name}} says {{message.content}} on {{message.createdAt | date:'short'}}</h3>
         <div ng-repeat="comment in message.comments">
-            <p>{{comment._user.user_name}} responded {{comment.content}}</p>
+            <p>{{comment.name}} responded {{comment.content}} on {{comment.createdAt | date: 'short'}}</p>
         </div>
-        <textarea rows="4" cols="60" ng-model="comment.content"></textarea>
-            <input type="submit" ng-click="createComment(message._id)">
+        <form name="postComment" ng-submit="createComment(message._id, $index)">
+        <textarea rows="4" cols="60" ng-model="newComment[$index].content"></textarea>
+            <input type="submit" value="Add Comment">
+            </form>
     </div>
 
 </div>

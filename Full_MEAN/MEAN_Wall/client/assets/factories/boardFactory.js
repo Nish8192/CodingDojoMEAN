@@ -4,7 +4,7 @@ app.factory('boardFactory', ['$http', function($http){
     factory.getMessages = function(callback) {
         $http.get('/messages')
         .then(function(returned_data){
-            console.log(returned_data);
+            // console.log(returned_data);
             if(typeof(callback) == "function"){
                 callback(returned_data.data);
             }
@@ -39,6 +39,7 @@ app.factory('boardFactory', ['$http', function($http){
         $http.post('/'+user_id+'/messages/'+message_id+'/create', comment)
         .then(function(returned_data){
             if(typeof(callback) == "function"){
+                // console.log("Hit callback");
                 callback(returned_data.data);
             }
         })
