@@ -1,0 +1,20 @@
+<div ng-controller="productController">
+
+    <h2>Add a New Product</h2>
+    <p>Name: <input type="text" ng-model="product.name"></p>
+    <p>Quantity: <input type="text" ng-model="product.quantity"></p>
+    <p>Description: <textarea rows="8" cols="80" ng-model="product.description"></textarea></p>
+    <button type="button" ng-click="create()">Add Product</button>
+    <table class="tg">
+  <tr>
+    <th class="tg-m1tb">Product Name</th>
+    <th class="tg-m1tb">Description</th>
+    <th class="tg-m1tb">Quantity</th>
+  </tr>
+  <tr ng-repeat="product in products">
+    <td class="tg-yw4l">{{product.name}}</td>
+    <td class="tg-yw4l">{{product.quantity}}</td>
+    <td class="tg-yw4l">{{product.description}}</td>
+  </tr>
+</table>
+</div>
