@@ -3,6 +3,8 @@ app.controller('orderController', ["$scope", "storeFactory", "$location", "$cook
     var index = function(){
         storeFactory.getOrders(function(data){
             console.log(data);
+            $scope.customers = data.customers;
+            $scope.products = data.products;
             $scope.orders = data.orders;
         })
     }
@@ -13,6 +15,7 @@ app.controller('orderController', ["$scope", "storeFactory", "$location", "$cook
         storeFactory.addOrder($scope.order, function(data){
             if(data.errors){console.log(data.errors);}
             index();
+            $scope.order = {};
         })
     }
 }])

@@ -8,13 +8,21 @@ module.exports = {
     create: function(req, res){
         Order.create(req.body, function(err, order){
             if(err){return res.status(400).json(err);}
-            Product.findOne({_id: req.params.id}, function(err, product){
-                product.quantity -= req.body.quantity;
-                product.save(function(err){
-                    if(err){return res.status(400).json(err);}
-                })
-            })
+            Product.findOne({_id: req.body._product}, function(err, product){
+                if(product.quantity < req.body.quantity){
+                    Order.remove({_id: order._id}, function(err){
+                        if(err){return res.status(400).json(err);}
+                    })
+                    return res.json({errors: "Not enough inventory left!"});
+                }
+                else{
+                    product.quantity -= req.body.quantity;
+                    product.save(function(err){
+                        if(err){return res.status(400).json(err);}
+                    })
+                }
             res.json(order);
+            })
         })
     },
     retrieve: function(req, res){

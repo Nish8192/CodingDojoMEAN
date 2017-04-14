@@ -1,7 +1,7 @@
 <div ng-controller="orderController">
 
     <h2>Add a New Order</h2>
-    <p>Customer: <select ng-model="order._user">
+    <p>Customer: <select ng-model="order._customer">
         <option ng-repeat="customer in customers" value="{{customer._id}}">{{customer.name}}</option>
     </select></p>
     <p>Product: <select ng-model="order._product">
@@ -14,7 +14,7 @@
         <option value="10">10</option>
         <option value="15">15</option>
     </select></p>
-
+    <button type="button" ng-click="addOrder()">Add Order</button>
     <table class="tg">
   <tr>
     <th class="tg-m1tb">Customer Name</th>
@@ -26,7 +26,7 @@
     <td class="tg-yw4l">{{order._customer.name}}</td>
     <td class="tg-yw4l">{{order._product.name}}</td>
     <td class="tg-yw4l">{{order.quantity}}</td>
-    <td class="tg-yw4l">{{order.createdAt}}</td>
+    <td class="tg-yw4l">{{order.createdAt | date: 'short'}}</td>
   </tr>
 </table>
 </div>

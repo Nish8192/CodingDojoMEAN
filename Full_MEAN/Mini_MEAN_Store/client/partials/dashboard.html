@@ -1,3 +1,43 @@
-<div ng-controller="customerController">
+<div ng-controller="orderController">
+    <h2>All Products</h2>
+    <table class="tg">
+  <tr>
+    <th class="tg-m1tb">Product Name</th>
+    <th class="tg-m1tb">Description</th>
+    <th class="tg-m1tb">Quantity</th>
+  </tr>
+  <tr ng-repeat="product in products">
+    <td class="tg-yw4l">{{product.name}}</td>
+    <td class="tg-yw4l">{{product.description}}</td>
+    <td class="tg-yw4l">{{product.quantity}}</td>
+  </tr>
+</table>
 
+<h2>Recent Orders</h2>
+<table class="tg">
+<tr>
+<th class="tg-m1tb">Customer Name</th>
+<th class="tg-m1tb">Product</th>
+<th class="tg-m1tb">Quantity</th>
+<th class="tg-m1tb">Date</th>
+</tr>
+<tr ng-repeat="order in orders | orderBy:'-createdAt' | limitTo: 3">
+<td class="tg-yw4l">{{order._customer.name}}</td>
+<td class="tg-yw4l">{{order._product.name}}</td>
+<td class="tg-yw4l">{{order.quantity}}</td>
+<td class="tg-yw4l">{{order.createdAt | date: 'short'}}</td>
+</tr>
+</table>
+
+<h2>New Customers</h2>
+<table class="tg">
+<tr>
+<th class="tg-m1tb">Customer Name</th>
+<th class="tg-m1tb">Created On</th>
+</tr>
+<tr ng-repeat = "customer in customers | orderBy:'-createdAt' | limitTo: 3">
+<td class="tg-yw4l">{{customer.name}}</td>
+<td class="tg-yw4l">{{customer.createdAt | date: 'short'}}</td>
+</tr>
+</table>
 </div>

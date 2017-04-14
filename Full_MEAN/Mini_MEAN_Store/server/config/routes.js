@@ -8,7 +8,7 @@ module.exports = function(app){
 app.get('/dashboard', function(req, res) {
   customers.index(req, res);
 });
-app.post('/customers/', function(req, res) {
+app.post('/customers', function(req, res) {
   customers.create(req, res);
 });
 app.delete('/customers/:id/destroy', function(req, res) {
