@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+    <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-m1tb{font-weight:bold;background-color:#000000;color:#ffffff;text-align:center;vertical-align:top}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+        <meta charset="utf-8">
+        <script src="angular/angular.js"></script>
+        <script src="angular-route/angular-route.js"></script>
+        <script src="angular-cookies/angular-cookies.js"></script>
+        <script src="assets/app.js" charset="utf-8"></script>
+        <script src="assets/controllers/userController.js" charset="utf-8"></script>
+        <script src="assets/controllers/messageController.js" charset="utf-8"></script>
+        <script src="assets/controllers/commentController.js" charset="utf-8"></script>
+        <script src="assets/controllers/topicController.js" charset="utf-8"></script>
+        <script src="assets/factories/boardFactory.js" charset="utf-8"></script>
+        <title>MEAN Discussion Board</title>
+    </head>
+    <body>
+        <div ng-controller="userController">
+            <button type="button" ng-click="logout()">LOGOUT</button>
+        </div>
+        <div ng-view="">
+
+        </div>
+    </body>
+</html>

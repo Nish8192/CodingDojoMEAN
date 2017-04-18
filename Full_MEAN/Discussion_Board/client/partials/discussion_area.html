@@ -1,0 +1,11 @@
+<div ng-controller="topicController">
+
+        <h1>{{topic._user.user_name}} posted a topic:</h1>
+        <h2>{{topic.topic}}</h2>
+        <h4>{{topic.description}}</h4>
+
+        <p>Post a response here: </p>
+        <input type="hidden" ng-model="message._topic" value="topic.topic">
+        <textarea rows="8" cols="80" ng-model="message.message"></textarea>
+        <button type="button" ng-click="createMessage()"></button>
+</div>

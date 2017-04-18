@@ -1,0 +1,28 @@
+<div ng-controller="topicController">
+    <h1>Full MEAN Discussion Board</h1>
+    <p>Create a new topic:</p>
+    <p>Topic: <input type="text" ng-model="topic.topic"></p>
+    <p>Description: <textarea rows="4" cols="60" ng-model="topic.description"></textarea></p>
+    <p>Category: <select ng-category="topic.category">
+        <option ng-repeat = "category in categories" value="{{category.id}}"></option>
+    </select></p>
+    <button type="button" ng-click="createTopic()">Add Topic</button>
+
+    <p>Filter: <input type="text" ng-model="filter"></p>
+    <table class="tg">
+  <tr>
+    <th class="tg-m1tb">Category</th>
+    <th class="tg-6uc3">Topic</th>
+    <th class="tg-m1tb">User</th>
+    <th class="tg-m1tb">Posts</th>
+  </tr>
+  <tr ng-repeat="topic in topics | filter: filter">
+    <td class="tg-yw4l">{{topic.category}}</td>
+    <td class="tg-yw4l">{{topic.topic}}</td>
+    <td class="tg-yw4l">{{topic._user.name}}</td>
+    <td class="tg-yw4l">{{topic.messages.length}}</td>
+  </tr>
+</table>
+
+
+</div>
