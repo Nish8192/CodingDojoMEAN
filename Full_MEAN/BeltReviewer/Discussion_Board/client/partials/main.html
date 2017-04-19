@@ -1,0 +1,28 @@
+<div ng-controller="mainController">
+    <h2>This is the main page..</h2>
+    <a href="#!/dashboard">Dashboard</a> | <a href="" ng-click="logout()">Logout</a>
+    <h3><a href="#!/users/{{topic._user._id}}">{{topic._user.name}}</a> posted a topic</h3>
+    <h3><i>Title: "{{topic.title}}"</i></h3>
+    <h4>Description: {{topic.description}}</h4>
+    <hr />
+    <div ng-repeat="error in errors track by $index">
+        <p style="color:red">{{error.message}}</p>
+    </div>
+    <h3>Post your answer here</h3>
+    <form ng-submit="createPost()">
+        <textarea cols="30" rows="3" placeholder="enter your message.." ng-model="newPost.content"></textarea>
+        <input type="submit" value="Post" />
+    </form>
+    <hr />
+    <div ng-repeat="post in posts | orderBy: '-createdAt' track by $index">
+        <h4 ><a href="#!/users/{{post._user._id}}">{{post._user.name}}</a> says: "{{post.content}}" | <span style="color:green">{{post.likes}} likes</span> <a href="" ng-click="like(post._id)"> ❤️ </a> | <span style="color:red">{{post.dislikes}} hates</span> <a href="" ng-click="dislike(post._id)">👎</a></h4>
+        <div ng-repeat="comment in post.comments">
+            <h5 style="margin-left: 20px;"><a href="#!/users/{{comment._user}}">{{comment.username}}</a> replies: "{{comment.content}}"</h5>
+        </div>
+        <form ng-submit="createComment(post._id, $index)">
+            <textarea row="3" cols="20" ng-model="comment[$index].content" placeholder="your comment here..."></textarea>
+            <input type="submit" value="Add Comment">
+        </form>
+    </div>
+
+</div>
