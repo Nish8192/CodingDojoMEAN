@@ -14,10 +14,13 @@
         <script src="angular-cookies/angular-cookies.js"></script>
         <script src="assets/app.js" charset="utf-8"></script>
         <script src="assets/controllers/userController.js" charset="utf-8"></script>
-        <script src="assets/factories/boardFactory.js" charset="utf-8"></script>
+        <script src="assets/factories/Factory.js" charset="utf-8"></script>
         <title>%%PROJECT NAME%%</title>
     </head>
     <body>
+        <div ng-controller="userController">
+            <button type="button" ng-click="logout()" ng-show="flag">LOGOUT</button>
+        </div>
         <div ng-view="">
 
         </div>

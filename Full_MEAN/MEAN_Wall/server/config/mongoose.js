@@ -6,7 +6,7 @@ var fs = require('fs');
 var path = require('path');
 // connect to mongoose!
 
-mongoose.connect('mongodb://localhost/MEAN_Wall'); //<-- ADD NEW PATH AFTER localhost/
+mongoose.connect('mongodb://localhost/Appointments'); //<-- ADD NEW PATH AFTER localhost/
 // create a variable that points to the path where all of the models live
 var models_path = path.join(__dirname, './../models');
 // read all of the files in the models_path and require (run) each of the javascript files
